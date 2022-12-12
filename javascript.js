@@ -53,7 +53,6 @@ function play (elementId){
     function currentTurnWon() {
         // check gameState to check if X or O won
         const winner = currentTurn;
-        let count = gameState.length;
 
         for (let i = 0; i <= 7; i++){
         const checkWins = winConditions[i];
