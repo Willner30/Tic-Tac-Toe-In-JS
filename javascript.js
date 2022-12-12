@@ -16,7 +16,7 @@ function restartButton () {
 
     confirm("Are you sure you want to restart the game?");
     return;
-};
+}
 
 function changeTurn (){
     if (currentTurn === player1) {
@@ -39,7 +39,7 @@ function play (elementId){
 
         alert("A new game will start!");
         return;
-    };
+    }
 
     function savePlay (){
         const data = document.getElementById(elementId).dataset.value;
@@ -53,6 +53,7 @@ function play (elementId){
     function currentTurnWon() {
         // check gameState to check if X or O won
         const winner = currentTurn;
+        let count = gameState.length;
 
         for (let i = 0; i <= 7; i++){
         const checkWins = winConditions[i];
@@ -66,10 +67,12 @@ function play (elementId){
             alert(`${winner} won!!!`);
             restartButton();
             break; 
+            } else if (!gameState.includes("")){
+                alert(`It's a draw!`);
+                restartButton();
+                break; 
             }
         }
-
-
     }
 
     if(document.getElementById(elementId).innerHTML === ""){ 
