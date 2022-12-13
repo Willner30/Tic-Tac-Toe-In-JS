@@ -1,8 +1,8 @@
 const player1 = "X";
 const player2 = "O";
-const gameState = ["", "", "", "", "", "", "", "", ""];
+let gameState = ["", "", "", "", "", "", "", "", ""];
 const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-var currentTurn = player1;
+let currentTurn = player1;
 
 function restartButton () {
     gameState.splice();
@@ -11,8 +11,8 @@ function restartButton () {
     for (let i = 0; i < deleter.length; i++){
         deleter[i].innerHTML = "";
     }
-
-    window.location.reload();
+    gameState = ["", "", "", "", "", "", "", "", ""];
+    currentTurn = player1;
 
     confirm("Are you sure you want to restart the game?");
     return;
@@ -35,7 +35,9 @@ function play (elementId){
             deleter[i].innerHTML = "";
         }
         
-        window.location.reload();
+        gameState = ["", "", "", "", "", "", "", "", ""];
+        currentTurn = player1;
+        changeTurn();
 
         alert("A new game will start!");
         return;
@@ -77,7 +79,7 @@ function play (elementId){
     if(document.getElementById(elementId).innerHTML === ""){ 
         document.getElementById(elementId).innerHTML = currentTurn;
         savePlay();
-        currentTurnWon()
+        currentTurnWon();
         changeTurn();
     }
 }
