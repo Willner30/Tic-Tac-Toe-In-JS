@@ -30,11 +30,11 @@ body{
     color: white;
 }
 
-.grid:nth-child(-n+3){
+.grid:nth-child(-n+3) {
     border-top: 0px;
 }
 
-.grid:nth-child(3n+1){
+.grid:nth-child(3n+1) {
     border-left: 0px;
 }
 
@@ -47,7 +47,7 @@ body{
 
 }
 
-.grid:hover{
+.grid:hover {
     background-color: lightblue;
 }
 
