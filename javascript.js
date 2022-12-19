@@ -12,15 +12,43 @@ const winConditions = [
   [2, 4, 6],
 ];
 let currentTurn = player1;
+let cpuPlaying = false;
+
+document.addEventListener('DOMContentLoaded', function () {
+  var checkbox = document.querySelector('input[type="checkbox"]');
+
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+      alert("You are going to be playing against the CPU now!");
+      cpuPlaying = true;
+    } else {
+      cpuPlaying = false;
+    }
+  });
+});
+
+function cpuPlay () {
+  currentTurn = player2;
+    const cells = document.querySelectorAll("p");
+    var cpuTurn = Math.floor(Math.random() * 9);
+  
+    while (gameState[cpuTurn] !== "") {
+      cpuTurn = Math.floor(Math.random() * 9);
+    }
+    cells[cpuTurn].innerHTML = player2;
+    gameState[cpuTurn] = player2;
+    currentTurnWon();
+    currentTurn = player1;
+} 
 
 function restartButton() {
   let deleter = document.getElementsByClassName("grid");
+  gameState = ["", "", "", "", "", "", "", "", ""];
+  currentTurn = player1;
 
   for (let i = 0; i < deleter.length; i++) {
     deleter[i].innerHTML = "";
   }
-  gameState = ["", "", "", "", "", "", "", "", ""];
-  currentTurn = player1;
 
   return;
 }
@@ -28,8 +56,38 @@ function restartButton() {
 function changeTurn() {
   if (currentTurn === player1) {
     currentTurn = player2;
-  } else {
+  } else{
     currentTurn = player1;
+  }
+}
+
+function currentTurnWon() {
+  // checks gameState to check if X or O won
+  const winner = currentTurn;
+
+  changeTurn();
+
+  for (let i = 0; i <= 7; i++) {
+    const checkWins = winConditions[i];
+    const check1 = gameState[checkWins[0]];
+    const check2 = gameState[checkWins[1]];
+    const check3 = gameState[checkWins[2]];
+
+    if (check1 === "" || check1 === "" || check3 === "") {
+      continue;
+    } else if (check1 === check2 && check1 === check3) {
+      alert(`${winner} won!!!`);
+      restartButton();
+      break;
+    }
+  }  
+
+  if (!gameState.includes("")) {
+    alert("It's a draw!");
+    restartButton();
+    return;
+  } else if (cpuPlaying == true && currentTurn === player2) {
+    setTimeout(cpuPlay, 100);
   }
 }
 
@@ -40,40 +98,13 @@ function play(elementId) {
     if (gameState[id] !== "") {
       return;
     }
+
     gameState[id] = currentTurn;
-  }
-
-  function currentTurnWon() {
-    // check gameState to check if X or O won
-    const winner = currentTurn;
-
-    for (let i = 0; i <= 7; i++) {
-      const checkWins = winConditions[i];
-      const check1 = gameState[checkWins[0]];
-      const check2 = gameState[checkWins[1]];
-      const check3 = gameState[checkWins[2]];
-
-      if (check1 === "" || check1 === "" || check3 === "") {
-        continue;
-      } else if (check1 === check2 && check1 === check3) {
-        alert(`${winner} won!!!`);
-        restartButton();
-        break;
-      }
-    }  
-    
-    if (!gameState.includes("")) {
-      alert("It's a draw!");
-      restartButton();
-      return;
-      
-    }
   }
 
   if (document.getElementById(elementId).innerHTML === "") {
     document.getElementById(elementId).innerHTML = currentTurn;
     savePlay();
     currentTurnWon();
-    changeTurn();
   }
 }
