@@ -1,10 +1,12 @@
 body{
+    /*Sets the background image*/
     background-image: url(bgimg.jpg);
     background-repeat: no-repeat;
     background-size: 115%;
 }
 
 #game {
+    /*Creates 9 grids for the gameboard and places them in the center of the screeen*/
     position: absolute;
     top: 50%;
     left: 50%;
@@ -18,6 +20,7 @@ body{
 }
 
 .grid {
+    /*Makes the cursor be pointy when is hover over the grid, creates the border for the grids as well as the color of the grids*/
     margin: 0px;
     border: 1px solid lightgray;
     width: 50px;
@@ -29,6 +32,8 @@ body{
     display: grid;
     color: white;
 }
+
+/*Deletes the top, left, right and bottom borders of the grid just to make look like the gameboard should look*/
 
 .grid:nth-child(-n+3) {
     border-top: 0px;
@@ -51,22 +56,8 @@ body{
     background-color: lightblue;
 }
 
-#start {
-    position: absolute;
-    bottom: 5px;
-    left: 27%;
-    margin-bottom: 10%;
-    width: 80px;
-    height: 50px;
-    background-color: blanchedalmond;
-    cursor: pointer;
-}
-
-#start:hover {
-    background-color: gray;
-}
-
 #restart {
+    /*Gives style to the restart button*/
     position: absolute;
     bottom: 5px;
     left: 67%;
@@ -79,4 +70,75 @@ body{
 
 #restart:hover {
     background-color: gray;
+}
+
+.cpu {
+    color: aliceblue;
+    position: absolute;
+    bottom: 26%;
+    left: 35%;
+}
+
+/*Gives style to the switch button*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    position: absolute;
+    bottom: 21%;
+    left: 35%;
+}
+  
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+  
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
 }

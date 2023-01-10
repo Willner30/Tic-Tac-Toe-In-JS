@@ -1,6 +1,6 @@
 const player1 = "X";
 const player2 = "O";
-let gameState = ["", "", "", "", "", "", "", "", ""];
+let gameState = ["", "", "", "", "", "", "", "", ""]; //This array saves the plays for 'X' or 'O' throughout the game
 const winConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -10,7 +10,7 @@ const winConditions = [
   [2, 5, 8],
   [0, 4, 8],
   [2, 4, 6],
-];
+]; //Those are the conditions that must be met for a win, if they aren't met and the gameboard is full, then it's a draw
 let currentTurn = player1;
 let cpuPlaying = false;
 
@@ -25,9 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
       cpuPlaying = false;
     }
   });
-});
+}); //if the switch for the CPU is clicked, this verifies if it was turned on or turned off then triggers an action depending on the state of the switch
 
 function cpuPlay () {
+  //this function creates a 'while loop' that generates a random integer number that will be used a position on the board. If that position has been played, then it generates another number until it finds one that hasn't been played yet
   currentTurn = player2;
     const cells = document.querySelectorAll("p");
     var cpuTurn = Math.floor(Math.random() * 9);
@@ -42,6 +43,7 @@ function cpuPlay () {
 } 
 
 function restartButton() {
+  //this function creates a 'for loop' that "deletes" every play on the board and sets gameState to its default value
   let deleter = document.getElementsByClassName("grid");
   gameState = ["", "", "", "", "", "", "", "", ""];
   currentTurn = player1;
@@ -54,6 +56,7 @@ function restartButton() {
 }
 
 function changeTurn() {
+  //as the name indicates, this function just changes the turn of the players, depending on who was the last one that made a move
   if (currentTurn === player1) {
     currentTurn = player2;
   } else{
@@ -62,7 +65,7 @@ function changeTurn() {
 }
 
 function currentTurnWon() {
-  // checks gameState to check if X or O won
+  // checks gameState to check if X or O won or if it's a draw
   const winner = currentTurn;
 
   changeTurn();
@@ -92,6 +95,7 @@ function currentTurnWon() {
 }
 
 function play(elementId) {
+  //and this is the last function, this one gets the data-value from the grid that was clicked on, checks if it's empty (if it is, then it can procede), saves the play on the gameState array and finally it changes the text on the grid to the current turn
   function savePlay() {
     const data = document.getElementById(elementId).dataset.value;
     const id = parseInt(data);

@@ -9,6 +9,8 @@
 
 <body>
     
+    <!--Creates the board grids, sets individual data value and the "play()" function is called whenever the user clicks on the grid-->
+
     <div id="game">
         <p id="p0" class="grid" data-value="0" onclick="play('p0')"></p>
         <p id="p1" class="grid" data-value="1" onclick="play('p1')"></p>
@@ -22,8 +24,12 @@
     </div>
     
     <footer>
+
+        <!--Creates a restart button that calls "restartButton()" function whenever it's clicked-->
         <button id="restart" onclick="restartButton()">Restart</button>
         <p class="cpu">Local/CPU</p>
+
+        <!--Creates a swtich that enables the CPU to play instead of a local player 2-->
         <label class="switch">
             <input type="checkbox" id="toggle">
             <span class="slider round"></span>
